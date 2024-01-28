@@ -81,36 +81,56 @@ const data = [
 	{ name: "pcworld.com" },
 ];
 
-let search = document.getElementById("search");
-let showResults = document.getElementById("showResults");
+document.addEventListener("DOMContentLoaded", function () {
+	let search = document.getElementById("search");
+	let showResults = document.getElementById("showResults");
 
-// for (let i = 0; i < data.length; i++) {
-// 	if (i == searchValue){
-// 		console.log("gogogog")
-// 	}
-//   }
+	search.addEventListener("input", function () {
+		let searchValue = search.value.toLowerCase();
 
-search.addEventListener("input", function () {
-	let searchValue = search.value.toLowerCase();
+		let filteredResults = customFilter(data, function (item) {
+			return customStartsWith(item.name.toLowerCase(), searchValue);
+		});
 
-	let filteredResults = data.filter(function (item) {
-		return item.name.toLowerCase().startsWith(searchValue);
+		displayResultsDropdown(filteredResults);
+
+		if (searchValue.length === 0) {
+			showResults.style.display = "none";
+			return;
+		}
 	});
-	if (searchValue == "") {
-		displayResults("");
+
+	function customFilter(array, callback) {
+		let filteredArray = [];
+		for (let i = 0; i < array.length; i++) {
+			if (callback(array[i])) {
+				filteredArray.push(array[i]);
+			}
+		}
+		return filteredArray;
 	}
 
-	// console.log(startsWith);
-	displayResults(filteredResults);
+	function customStartsWith(string, startW) {
+		return string.indexOf(startW) === 0;
+	}
+
+	function displayResultsDropdown(resultsArray, searchValue) {
+
+		while (showResults.firstChild) {
+			showResults.removeChild(showResults.firstChild);
+		  }
+
+		showResults.style.display = "block";
+
+		let selectDropdown = document.createElement("select");
+		selectDropdown.classList.add("dropdown");
+
+		resultsArray.forEach(function (result) {
+			let resultElement = document.createElement("div");
+			resultElement.classList.add("result-item");
+			resultElement.textContent = result.name;
+			showResults.appendChild(resultElement);
+			showResults.appendChild(selectDropdown)
+		});
+	}
 });
-
-function displayResults(results) {
-	showResults.innerHTML = "";
-
-	results.forEach(function (results) {
-		let resultsElement = document.createElement("div");
-		resultsElement.classList.add("searchResult");
-		resultsElement.textContent = results.name;
-		showResults.appendChild(resultsElement);
-	});
-}

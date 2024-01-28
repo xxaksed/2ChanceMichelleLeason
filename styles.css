@@ -6,8 +6,8 @@ body {
 }
 
 .content {
-	height: 80%;
-	margin-bottom: 100px;
+	height: 100%;
+	/* margin-bottom: 100px; */
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -17,6 +17,7 @@ body {
 #logo {
 	margin-bottom: 60px;
 	font-size: 100px;
+
 }
 
 #search {
@@ -25,10 +26,26 @@ body {
 	border-radius: 15px;
 	font-size: 30px;
 	text-align: center;
-	background-color: rgb(209, 209, 209)	;
+	background-color: rgb(209, 209, 209);
 }
-#showResults {
-	width: 100px;
-	height: 100px;
-	background-color: antiquewhite;
+
+.dropdown {
+	top: 100%;
+	left: 0;
+	width: 100%;
+	background-color:rgb(209, 209, 209);
+	border: 1px solid #646464;
+	border-top: none;
+	display: none;
+	border-radius: 15px;
+}
+
+.dropdown div {
+	padding: 8px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.dropdown div:hover {
+	background-color: #f4f4f4;
 }
