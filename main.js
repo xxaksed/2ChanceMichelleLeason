@@ -25,4 +25,6 @@ console.log(DeepNestedObject)
 
 clearNested(DeepNestedObject)
 
+console.log("finish")
+
 console.log(DeepNestedObject)
