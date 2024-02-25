@@ -43,23 +43,21 @@ let string = "........__=========AAAA AAA  BBB   BBBB";
 
 function transform(myString) {
 	let copyStringToArray = myString.split("");
-	let counter = 1;
 	let newString = "";
+	let hashMap = {};
+	console.log(copyStringToArray);
 
-	let filteredArray = copyStringToArray.filter((symbol) => symbol.match(/[A-Za-z]/))
-
-	console.log(filteredArray)
-	
-
-	for (let i = 0; i < filteredArray.length; i++) {
-		if (filteredArray[i] !== filteredArray[i+1]) {
-			newString += counter + filteredArray[i]
-			counter = 0
-		}
-		counter++
+	for (let i = 0; i < copyStringToArray.length; i++) {
+		if (copyStringToArray[i].match(/[A-Za-z]/)) {
+			hashMap[copyStringToArray[i]] += 1
+			if(hashMap[copyStringToArray[i]]){
+				hashMap[copyStringToArray[i]] + 1
+			}
+				else{hashMap[copyStringToArray[i]] = 1}
+		}					
 	}
 
-	console.log(newString);
+	console.log(hashMap);
 	return myString;
 }
 
